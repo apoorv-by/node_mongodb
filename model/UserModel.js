@@ -18,9 +18,12 @@ const UserSchema = new mongoose.Schema({
     age:{
         type:Number,
         required:false
+    },
+    points:{
+        type:Number,
+        required:false
     }})
 
     // var a = 10
     // module.exports = a -> can be used anywhere using require(a)
     module.exports = mongoose.model("user", UserSchema)
-    

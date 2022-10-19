@@ -5,7 +5,8 @@ exports.addUser = (req,res)=>{
         fname:req.body.fname,
         lname:req.body.lname,
         email:req.body.email,
-        age:req.body.age
+        age:req.body.age,
+        points:req.body.points
     })
 
     user.save().
@@ -107,9 +108,25 @@ exports.incrementAge = (req,res) => {
 exports.deleteUserByName = (req,res) => {
     UserModel.deleteOne({fname:req.query.fname}, () => {
         res.status(200).json({
-            message : "Successfully deleted " +req.query.fname+ " User",
+            message : "Successfully deleted " +req.query.fname+ " User"
         })
     })
+}
+
+//aggregate
+exports.aggregatePoints = (req,res) => {
+    const user = UserModel.aggregate([{$group: {_id:null, Total_points:{$sum:"$points"}}}])
+
+    user
+      .then((data) => {
+        res.status(200).json({
+            message:"Aggregated points",
+            data:data,
+        })
+      })
+      .catch((error) => {
+        res.send(error);
+      })
 }
 
 

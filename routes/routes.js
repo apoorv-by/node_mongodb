@@ -15,5 +15,6 @@ router.get("/find-regex", controller.findRegex)
 router.put("/update-age", controller.updateAge)
 router.put("/increment-age", controller.incrementAge)
 router.delete("/delete-user",controller.deleteUserByName)
+router.get("/aggregate-points", controller.aggregatePoints)
 
 module.exports = router
